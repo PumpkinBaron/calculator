@@ -23,7 +23,6 @@ function isButton(keyboardInput){
         || numbers.includes(keyboardInput)
         || keyboardInput === "."
         || keyboardInput === "Delete"
-        || keyboardInput === "Backspace"
         || keyboardInput === "Enter";
 }
 

@@ -54,6 +54,7 @@ button {
 }
 
 .zero {
+  height: 25px;
   width: 120px;
   border-radius: 60%;  
   align-self: center;
@@ -82,4 +83,15 @@ button {
     display: flex;
     justify-content: flex-end;
 
+}
+
+.olinefour {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.backspace {
+    width: 80px;
+    height: 25px;
+    flex-grow: 1;
 }
