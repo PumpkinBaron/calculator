@@ -2,7 +2,7 @@
 const display = document.querySelector(".display-contents");
 const buttons = document.querySelector(".buttons");
 const error = "Cannot divide by zero";
-/// "Enter" corresponds to "="
+
 const operators = ["+", "-", "*", "/"]
 const numbers = ["0", "1", "2", "3",
                  "4", "5", "6", "7",
@@ -16,8 +16,10 @@ let firstNumDecimalFlag = false;
 let secondNumDecimalFlag = false;
 
 /// Helper functions
+
 /// Boolean checks
 /// Checks if the keyboard input corresponds to a calculator button
+
 function isButton(keyboardInput){
     return operators.includes(keyboardInput)
         || numbers.includes(keyboardInput)
@@ -160,7 +162,9 @@ function clickButton(buttonInput){
     if (buttonInput === "Delete") {
         runBackspace();
     }
+
     // Call operate() by inputting an operator into the full calculator
+    
     if (isOperator(buttonInput) && secondNum !== "") {
         operate();
         operator = buttonInput;
