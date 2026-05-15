@@ -149,7 +149,7 @@ function clickButton(buttonInput){
     
     if (isComputable(buttonInput)) {
         console.log("Computing...")
-        if (operator === "/" && Number(secondNum) === 0) {
+        if (operator === "/" && secondNum === "0") {
             clear();
             firstNum = error;
         } else {
@@ -193,6 +193,9 @@ document.addEventListener('keypress', event => {
     }
     if (event.key === "C"){
         clickButton("Clear");
+    }
+    if (event.key === "="){
+        clickButton("Enter");
     }
 });
 
