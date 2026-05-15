@@ -18,9 +18,8 @@ let secondNumDecimalFlag = false;
 /// Helper functions
 
 /// Boolean checks
-/// Checks if the keyboard input corresponds to a calculator button
 
-function isButton(keyboardInput){
+function correspondsToButton(keyboardInput){
     return operators.includes(keyboardInput)
         || numbers.includes(keyboardInput)
         || keyboardInput === "."
@@ -192,7 +191,7 @@ buttons.addEventListener('click', event => {
 });
 
 document.addEventListener('keypress', event => {
-    if (isButton(event.key)) {
+    if (correspondsToButton(event.key)) {
         clickButton(event.key);
     }
     if (event.key === "C"){
