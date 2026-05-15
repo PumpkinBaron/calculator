@@ -17,7 +17,7 @@ let secondNumDecimalFlag = false;
 
 /// Helper functions
 
-/// Boolean checks
+    /// Boolean checks
 
 function correspondsToButton(keyboardInput){
     return operators.includes(keyboardInput)
@@ -58,7 +58,7 @@ function isComputable(buttonInput) {
         && secondNum !==  "");
 }
 
-// Sub-operations
+    // Sub-operations
 
 function compute(a,b){
     if (operator === "+") return a + b;
@@ -163,7 +163,6 @@ function clickButton(buttonInput){
     }
 
     // Call operate() by inputting an operator into the full calculator
-    
     if (isOperator(buttonInput) && secondNum !== "") {
         operate();
         operator = buttonInput;
