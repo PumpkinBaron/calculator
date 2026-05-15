@@ -123,14 +123,13 @@ function clickButton(buttonInput){
         if (buttonInput === "." && secondNumDecimalFlag === false) {
             secondNum += buttonInput;
             secondNumDecimalFlag = true;
-        } else {
+        } else if (buttonInput !== ".") {
             secondNum += buttonInput;
         }
         console.log(`Second number is now ${secondNum}`);
     }    
     // Defining the operator
     if (isOperator(buttonInput) && firstNum !== "" && secondNum === ""){
-        console.log(`Setting operator to ${buttonInput}...`)
             operator = buttonInput;
     }
 
@@ -138,21 +137,17 @@ function clickButton(buttonInput){
     if (operator === "" 
         && isANumberOrDecimalPoint(buttonInput)){
             const newNum = firstNum + buttonInput;
-        console.log(`First number is ${firstNum} 
-            and button input is ${isANumberOrDecimalPoint(buttonInput)} 
-            Defining the first number as ${newNum}...`);
         if (buttonInput === "." && firstNumDecimalFlag === false) {
             firstNum += buttonInput;
             firstNumDecimalFlag = true;
-        } else {
+        } else if (buttonInput !== ".") {
             firstNum = newNum;
         }
-        console.log(`First number is now ${firstNum}`);
+        
     }
 
-    console.log(`Current text content is ${display}. Redefining...`);
+    
     display.textContent = `${firstNum} ${operator} ${secondNum}`;
-    console.log(`Display set to ${display.textContent}`);
 };
 
 // Listen for button presses, either on screen or on the user's keyboard.
@@ -161,18 +156,17 @@ function getID(element) {
 }
 
 buttons.addEventListener('click', event => {
-        console.log(`Registered click on ${event.target.id}`);
         if (event.target.id !== undefined ){
         clickButton(event.target.id.slice(1));
         }
 });
 
 document.addEventListener('keypress', event => {
-    console.log(`Registered keyboard input ${event.key}`);
     if (isButton(event.key)) {
         clickButton(event.key);
-    } else if (event.shiftKey && event.key === "Backspace"){
-        clickButton("clear");
+    }
+    if (event.key === "C"){
+        clickButton("Clear");
     }
 });
 
