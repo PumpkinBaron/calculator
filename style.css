@@ -1,0 +1,85 @@
+.calculator {
+    display: flex;
+    width: 210px;
+    justify-content: flex-start;
+    flex-direction: column;
+    border-style: solid;
+    padding: 5px;
+
+} 
+
+.display {
+    display:flex;
+    background-color: aliceblue;
+    max-width: 200px;
+    min-height: 30px;
+    border-style: solid;
+    margin: 5px;
+    flex-grow: 1;
+}
+
+.display-contents {
+    width: 180px;
+    padding: 10px;
+    overflow-wrap: break-word;
+}
+
+button {
+    width: 40px;
+    height: 20px;
+    margin: 0;
+    border-radius: 100%;
+}
+
+.buttons {
+    display: flex;
+    width: 210px;
+}
+
+.nlineone{
+    display: flex;
+}
+
+.nlinetwo{
+    display: flex;
+}
+
+.nlinethree{
+    display: flex;
+}
+
+.nlinefour{
+    display: flex;
+    justify-content: center;
+}
+
+.zero {
+  width: 120px;
+  border-radius: 60%;  
+  align-self: center;
+}
+
+.operators{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.olineone {
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.olinetwo {
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.olinethree {
+    display: flex;
+    justify-content: flex-end;
+
+}
