@@ -1,6 +1,7 @@
 /// Variables
 const display = document.querySelector(".display-contents");
 const buttons = document.querySelector(".buttons");
+const error = "Cannot divide by zero";
 /// "Enter" corresponds to "="
 const operators = ["+", "-", "*", "/"]
 const numbers = ["0", "1", "2", "3",
@@ -77,6 +78,9 @@ function operate(){
 /// Main Function
 function clickButton(buttonInput){
     console.log(`Received input ${buttonInput}.`)
+    if (firstNum === error) {
+        clear();
+    }
     // Operations
     if (buttonInput === "Clear"){
         console.log("Clearing...")
@@ -87,7 +91,7 @@ function clickButton(buttonInput){
         console.log("Computing...")
         if (operator === "/" && Number(secondNum) === 0) {
             clear();
-            firstNum = "Cannot divide by 0";
+            firstNum = error;
         } else {
         operate();
         }
