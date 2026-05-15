@@ -31,7 +31,30 @@ function isOperator(buttonInput){
 }
 
 function isANumberOrDecimalPoint(string){
-    return numbers.includes(string) || string === ".";
+    return numbers.includes(string) 
+        || string === ".";
+}
+
+function inputtingFirstNumber(buttonInput) {
+    return operator === "" 
+        && isANumberOrDecimalPoint(buttonInput);
+}
+
+function inputtingOperator(buttonInput) {
+    return isOperator(buttonInput) 
+         && firstNum !== "" 
+         && secondNum === "";
+}
+
+function inputtingSecondNumber(buttonInput) {
+    return operator !== ""  
+        && isANumberOrDecimalPoint(buttonInput);
+}
+
+function isComputable(buttonInput) {
+    return (buttonInput === "Enter" 
+        && operator !== "" 
+        && secondNum !==  "");
 }
 
 // Sub-operations
@@ -74,19 +97,57 @@ function operate(){
     firstNum = result + "";
 }
 
+function runBackspace(){
+    console.log("Backspace...")
+    if (secondNum === "" && operator === "") {
+        firstNum = backspace(firstNum);
+    } else if (firstNum !== "" && secondNum === ""){
+        operator = "";
+    } else if (firstNum !== "" && secondNum !== ""){
+        secondNum = backspace(secondNum);
+    }
+}
+
+function defineFirstNumber(buttonInput) {
+    const newNum = firstNum + buttonInput;
+    if (buttonInput === "." && firstNumDecimalFlag === false) {
+    firstNum += buttonInput;
+    firstNumDecimalFlag = true;
+    } else if (buttonInput !== ".") {
+    firstNum = newNum;
+    }  
+}
+
+function defineSecondNumber(buttonInput) {
+    console.log(`First number is ${firstNum}, which is not an empty string 
+    ${firstNum !== ""} and Second number is ${secondNum} 
+    and button input is ${isANumberOrDecimalPoint(buttonInput)} 
+    Defining the second number...`);
+    if (buttonInput === "." && secondNumDecimalFlag === false) {
+    secondNum += buttonInput;
+    secondNumDecimalFlag = true;
+    } else if (buttonInput !== ".") {
+    secondNum += buttonInput;
+    }
+    console.log(`Second number is now ${secondNum}`);
+}
+
 /// Main Function
+
 function clickButton(buttonInput){
+
     console.log(`Received input ${buttonInput}.`)
+
     if (firstNum === error) {
         clear();
     }
-    // Operations
+
     if (buttonInput === "Clear"){
         console.log("Clearing...")
          clear();
     }
-    // "Enter" corresponds to "=".
-    if (buttonInput === "Enter" && operator !== "" && secondNum !==  "") {
+    
+    if (isComputable(buttonInput)) {
         console.log("Computing...")
         if (operator === "/" && Number(secondNum) === 0) {
             clear();
@@ -95,65 +156,30 @@ function clickButton(buttonInput){
         operate();
         }
     }
-    // Remove the last value, if any, from either firstNum, operator,
-    // or secondNum in a way that feels like using a text editor.
+
     if (buttonInput === "Delete") {
-        console.log("Backspace...")
-        if (secondNum === "" && operator === "") {
-            firstNum = backspace(firstNum);
-        } else if (firstNum !== "" && secondNum === ""){
-            operator = "";
-        } else if (firstNum !== "" && secondNum !== ""){
-            secondNum = backspace(secondNum);
-        }
+        runBackspace();
     }
     // Call operate() by inputting an operator into the full calculator
     if (isOperator(buttonInput) && secondNum !== "") {
-        console.log("Computing via operator inputted to a full calculator...")
         operate();
         operator = buttonInput;
     }
-        // Defining the second number
-    if (operator !== ""  
-        && isANumberOrDecimalPoint(buttonInput)){
-        console.log(`First number is ${firstNum}, which is not an empty string 
-            ${firstNum !== ""} and Second number is ${secondNum} 
-            and button input is ${isANumberOrDecimalPoint(buttonInput)} 
-            Defining the second number...`);
-        if (buttonInput === "." && secondNumDecimalFlag === false) {
-            secondNum += buttonInput;
-            secondNumDecimalFlag = true;
-        } else if (buttonInput !== ".") {
-            secondNum += buttonInput;
-        }
-        console.log(`Second number is now ${secondNum}`);
+    
+    if (inputtingSecondNumber(buttonInput)){
+       defineSecondNumber(buttonInput);
     }    
-    // Defining the operator
-    if (isOperator(buttonInput) && firstNum !== "" && secondNum === ""){
+
+    if (inputtingOperator(buttonInput)) {
             operator = buttonInput;
     }
-
-    // Defining first number
-    if (operator === "" 
-        && isANumberOrDecimalPoint(buttonInput)){
-            const newNum = firstNum + buttonInput;
-        if (buttonInput === "." && firstNumDecimalFlag === false) {
-            firstNum += buttonInput;
-            firstNumDecimalFlag = true;
-        } else if (buttonInput !== ".") {
-            firstNum = newNum;
-        }
-        
-    }
-
-    
+     if (inputtingFirstNumber(buttonInput)) {
+        defineFirstNumber(buttonInput);
+     }
     display.textContent = `${firstNum} ${operator} ${secondNum}`;
 };
 
 // Listen for button presses, either on screen or on the user's keyboard.
-function getID(element) {
-    return element.id;
-}
 
 buttons.addEventListener('click', event => {
         if (event.target.id !== undefined ){
